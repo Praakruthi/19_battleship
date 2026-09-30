@@ -10,8 +10,8 @@ class Battleship:
         self._setup()
 
     def _setup(self):
-        self.player.place_ship({(1, 1), (1, 2), (1, 3)})
-        self.enemy.place_ship({(2, 2), (2, 3), (2, 4)})
+        self.player.place_ship({(0, 0), (0, 1), (0, 2)})
+        self.enemy.place_ship({(1, 1), (1, 2), (1, 3)})
 
     def show(self):
         print("\nYour shots are coordinates like 2,3.")
@@ -42,14 +42,6 @@ class Battleship:
                 return
 
             ai_pos = self.ai.choose()
-
-            # representation consistent through the whole flow.
-            try:
-                ar, ac = map(int, ai_pos.split(","))
-                player_pos = (ar, ac)
-            except ValueError:
-                player_pos = None
-            if player_pos is not None:
-                print("AI fired at", ai_pos)
-                if player_pos in self.player.ships:
-                    print("AI scored a hit.")
+            print("AI fired at", f"{ai_pos[0] + 1},{ai_pos[1] + 1}")
+            if ai_pos in self.player.ships:
+                print("AI scored a hit.")
